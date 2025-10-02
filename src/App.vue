@@ -10,7 +10,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="{ 'pb-10': !isDesktop }">
+  <div :class="{ 'py-3': !isDesktop }">
     <nav class="flex gap-4 items-center">
       <RouterLink
         to="/"
@@ -34,6 +34,7 @@ onMounted(() => {
         Not Exists
       </RouterLink>
     </nav>
+    <div>isDesktop {{ isDesktop }}</div>
     <router-view />
   </div>
 </template>

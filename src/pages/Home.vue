@@ -2,8 +2,10 @@
 import { onMounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 import { Post } from "../models/post";
+import icon from "../assets/vue.svg";
 
 const posts = ref<Post[]>([]);
+
 onMounted(() => {
   fetch("https://jsonplaceholder.typicode.com/posts")
     .then((res) => res.json())
@@ -11,6 +13,24 @@ onMounted(() => {
       posts.value = res;
     })
     .catch(console.error);
+  if (typeof Notification === "undefined") {
+    console.log("Browser does not support the Notification API.");
+    return;
+  }
+
+  const showNotification = () => {
+    new Notification("Tauri App", { body: "Notification API", icon: icon });
+  };
+
+  if (Notification.permission === "granted") {
+    showNotification();
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        showNotification();
+      }
+    });
+  }
 });
 </script>
 
