@@ -10,7 +10,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="{ 'py-3': !isDesktop }">
+  <div :class="{ 'py-8': !isDesktop }">
     <nav class="flex gap-4 items-center">
       <RouterLink
         to="/"
