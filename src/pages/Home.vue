@@ -25,7 +25,7 @@ onMounted(() => {
   }
 
   const showNotification = () => {
-    new Notification("Tauri App", { body: "Notification API", icon: icon });
+    // new Notification("Tauri App", { body: "Notification API", icon: icon });
   };
 
   if (Notification.permission === "granted") {
@@ -60,7 +60,6 @@ const schema = z.object({
 
 const resolver = zodResolver(schema);
 type FormData = z.infer<typeof schema>;
-// { valid, data }: { valid: boolean; data: FormData }
 const onFormSubmit = ({ valid, values }: FormSubmitEvent) => {
   const formData = values as FormData;
   console.log(formData);
@@ -78,6 +77,10 @@ const onFormSubmit = ({ valid, values }: FormSubmitEvent) => {
 <template>
   <main class="px-5">
     <h1 class="text-3xl font-bold">Home</h1>
+    <p v-color="'yellow'">This sentence is important!</p>
+    <p v-has-role="['product:create']">Create Product</p>
+    <p v-has-role="['sale:create']">Has Role Unavaliable!</p>
+    <p v-has-role="['product:view']">Product List</p>
     <div class="card flex justify-center">
       <Toast />
       <Form
@@ -121,6 +124,9 @@ const onFormSubmit = ({ valid, values }: FormSubmitEvent) => {
         </FormField>
         <Button type="submit" severity="secondary" label="Submit" />
       </Form>
+    </div>
+    <div>
+      <img :src="icon" alt="Vue Icon" :srcset="icon" class="w-[100px]" />
     </div>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde commodi esse

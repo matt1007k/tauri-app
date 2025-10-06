@@ -7,7 +7,6 @@ const name = ref("");
 const listDict = ref<string[]>([]);
 
 async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
   greetMsg.value = await invoke("greet", { name: name.value });
 }
 

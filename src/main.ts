@@ -7,12 +7,21 @@ import Aura from "@primeuix/themes/aura";
 
 import ToastService from "primevue/toastservice";
 
-import { router } from "./router";
+import router from "./router";
 import "./app.css";
+import hasRole from "./directives/has-role";
 
 const pinia = createPinia();
 
-createApp(App)
+const app = createApp(App);
+
+app.directive("has-role", hasRole);
+app.directive("color", (el, binding) => {
+  // this will be called for both `mounted` and `updated`
+  el.style.color = binding.value;
+});
+
+app
   .use(router)
   .use(pinia)
   .use(VueQueryPlugin)
